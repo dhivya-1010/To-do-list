@@ -7,7 +7,10 @@
 typedef struct {  //structure
     char task[MAX_LENGTH]; //tasks with maximum length
     int isCompleted; 
-} ToDo;  //typedef - wherever struct to be used, ToDo can be used
+} ToDo;  
+
+//typedef - wherever struct to be used, ToDo can be used
+//The typedef keyword in C is used to create new names for existing data types, enhancing code readability and simplifying type declarations
 
 ToDo tasks[MAX_TASKS]; //tasks must be within the limit
 int taskCount = 0;  //initially the task count is 0
