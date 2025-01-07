@@ -1,44 +1,46 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_TASKS 100 //macro 
-#define MAX_LENGTH 100 //macro
+#define MAX_TASKS 100   //macro 
+#define MAX_LENGTH 100   //macro
 
-typedef struct {  //structure
-    char task[MAX_LENGTH]; //tasks with maximum length
+typedef struct {           //structure
+    char task[MAX_LENGTH];  //tasks with maximum length
     int isCompleted; 
 } ToDo;  
 
-//typedef - wherever struct to be used, ToDo can be used
-//The typedef keyword in C is used to create new names for existing data types, enhancing code readability and simplifying type declarations
+               //typedef - wherever struct to be used, ToDo can be used
+              //The typedef keyword in C is used to create new names for existing data types, enhancing code readability and simplifying type declarations
 
-ToDo tasks[MAX_TASKS]; //tasks must be within the limit
-int taskCount = 0;  //initially the task count is 0
+ToDo tasks[MAX_TASKS];       //tasks must be within the limit
+int taskCount = 0;          //initially the task count is 0
 
-void addTask() {  //1) adding task
-    if (taskCount >= MAX_TASKS) //if task exceeds maximum limit
+void addTask() {                  //1) adding task
+    if (taskCount >= MAX_TASKS)    //if task exceeds maximum limit
     {
         printf("Task list is full!\n");
         return;
     }
     printf("Enter the task: ");
-    getchar(); // To consume the leftover newline character
+    getchar();                      // To consume the leftover newline character
     fgets(tasks[taskCount].task, MAX_LENGTH, stdin);
-    tasks[taskCount].task[strcspn(tasks[taskCount].task, "\n")] = '\0'; // Remove newline character
-    //strcspn - Here, strcspn() is being used to find the index of the newline character '\n' in the task string
-    tasks[taskCount].isCompleted = 0; //incrementing the completed task count
-    taskCount++; //increement the task count
+    tasks[taskCount].task[strcspn(tasks[taskCount].task, "\n")] = '\0';        // Remove newline character
+                        
+                  //strcspn - Here, strcspn() is being used to find the index of the newline character '\n' in the task string
+    
+    tasks[taskCount].isCompleted = 0;     //incrementing the completed task count
+    taskCount++;                         //increement the task count
     printf("Task added successfully!\n");
 }
 
-void viewTasks() {  //view the tasks assigned
-    if (taskCount == 0) {  //if there is no task
+void viewTasks() {                 //view the tasks assigned
+    if (taskCount == 0) {              //if there is no task
         printf("No tasks to display!\n");
         return;
     }
     printf("\nTo-Do List:\n");
-    for (int i = 0; i < taskCount; i++) { //using loop to display all the tasks
-        printf("%d. [%c] %s\n", i + 1, tasks[i].isCompleted ? 'X' : ' ', tasks[i].task); // marks 'X' if the task is completed
+    for (int i = 0; i < taskCount; i++) {               //using loop to display all the tasks
+        printf("%d. [%c] %s\n", i + 1, tasks[i].isCompleted ? 'X' : ' ', tasks[i].task);             // marks 'X' if the task is completed
     }
 }
 
@@ -46,20 +48,20 @@ void markTaskCompleted() {  //if task is completed
     int taskNumber;
     printf("Enter the task number to mark as completed: ");
     scanf("%d", &taskNumber);
-    if (taskNumber < 1 || taskNumber > taskCount)//if the entered choice is invalid  
+    if (taskNumber < 1 || taskNumber > taskCount)                     //if the entered choice is invalid  
     {
         printf("Invalid task number!\n");
         return;
     }
-    tasks[taskNumber - 1].isCompleted = 1; //compiler recognizes as n-1 (index)
+    tasks[taskNumber - 1].isCompleted = 1;                          //compiler recognizes as n-1 (index)
     printf("Task marked as completed!\n");
 }
 
-void deleteTask() {  //delete the task if done
+void deleteTask() {                                               //delete the task if done
     int taskNumber;
     printf("Enter the task number to delete: ");
     scanf("%d", &taskNumber);
-    if (taskNumber < 1 || taskNumber > taskCount) //if the entered choice is invalid 
+    if (taskNumber < 1 || taskNumber > taskCount)                     //if the entered choice is invalid 
     {
         printf("Invalid task number!\n");
         return;
@@ -71,10 +73,10 @@ void deleteTask() {  //delete the task if done
     printf("Task deleted successfully!\n");
 }
 
-int main() { //execution starts
+int main() {                              //execution starts
     int choice;
 
-    do {  //do while loop
+    do {                                 //do while loop
         printf("\nTo-Do List Menu:\n");
         printf("1. Add Task\n");
         printf("2. View Tasks\n");
@@ -86,24 +88,24 @@ int main() { //execution starts
 
         switch (choice) { //switching choices
             case 1:
-                addTask(); //function call
-                break; //terminate
+                addTask();           //function call
+                break;               
             case 2:
-                viewTasks(); //function call
-                break;//terminate
+                viewTasks();            //function call
+                break;                 
             case 3:
                 markTaskCompleted();  //function call
-                break;//terminate
+                break;
             case 4:
                 deleteTask(); //function call
-                break; //terminate
+                break; 
             case 5:
                 printf("Exiting the program. Goodbye!\n");
-                break;//terminate
+                break;
             default:
                 printf("Invalid choice! Please try again.\n");
         }
-    } while (choice != 5); //if it is out of choices
+    } while (choice != 5);                //if it is out of choices
 
     return 0;
 }
